@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
-import { api } from "./services/api";
+/* import { useState, useEffect } from "react";
+import { api } from "./services/api"; */
 import { Navigate } from "react-router-dom";
+import { useAuth } from "./context/AuthContext"
 
 export const PrivateRoute = ({ children }) => {
-  const [auth, setAuth] = useState(null);
+  /* const [auth, setAuth] = useState(null);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -20,7 +21,12 @@ export const PrivateRoute = ({ children }) => {
 
   if (auth === null) {
     return null; // o un loader visual
-  }
+  } */
 
-  return auth ? children : <Navigate to="/login" />;
+    const { user, loading } = useAuth()
+
+     if(loading) return <p>Cargando...</p>
+
+  //return auth ? children : <Navigate to="/login" />;
+   return user ? children : <Navigate to="/login"/>
 };

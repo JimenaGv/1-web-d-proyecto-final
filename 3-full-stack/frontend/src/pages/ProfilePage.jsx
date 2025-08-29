@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+/* import { useEffect, useState } from "react";
 import { logoutRequest, profileRequest } from "../api/auth";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom" */
+import { useAuth } from "../context/AuthContext"
 
 export const ProfilePage = () => {
-  const [user, setUser] = useState(null);
+  /* const [user, setUser] = useState(null);
 
   useEffect(() => {
     const checkProfile = async () => {
@@ -23,8 +24,9 @@ export const ProfilePage = () => {
 
   const handleLogout = async () => {
     await logoutRequest()
-    navigate("/login")
-  }
+    navigate("/login") }*/
+  
+  const { user, logout } = useAuth()
 
   return (
     <div>
@@ -33,7 +35,8 @@ export const ProfilePage = () => {
         <div>
           <p>Nombre: {user.username}</p>
           <p>Email: {user.email}</p>
-          <button onClick={handleLogout}>Cerrar sesión</button>
+          {/* <button onClick={handleLogout}>Cerrar sesión</button> */}
+          <button onClick={logout}>Cerrar sesión</button>
         </div>
       ) : (
         <div>

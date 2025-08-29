@@ -1,8 +1,13 @@
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { loginRequest } from "../api/auth";
+import { useAuth } from "../context/AuthContext";
 
 export const LoginPage = () => {
+
+  // Llamar custom hook useAuth para recuperar la función para actualizar usuario
+  const { setUser } = useAuth()
+
   const {
     register,
     handleSubmit,
@@ -18,7 +23,8 @@ export const LoginPage = () => {
 
     try {
       const res = await loginRequest({ email, password });
-      console.log(res);
+      //console.log(res);
+      setUser(res.data)
       navigate("/profile")
     } catch (error) {
       console.log(error)
